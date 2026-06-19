@@ -17,7 +17,7 @@ const groupSkills = (skills = []) => {
       groups.set(skill.category, []);
     }
 
-    groups.get(skill.category).push(`${skill.name} · ${skill.level}`);
+    groups.get(skill.category).push(`${skill.name} - ${skill.level}`);
   });
 
   return Array.from(groups, ([name, items]) => ({ name, items }));
@@ -52,6 +52,20 @@ export const profile = {
     "AI research and applied machine learning",
     "Robotics, simulation, and embedded systems",
     "Creative technical problem solving",
+  ],
+  metrics: [
+    { value: "MSc", label: "Automation and Control Engineering" },
+    { value: "20+", label: "Technical skills mapped" },
+    { value: "2", label: "Research roles in progress" },
+    { value: "AI", label: "Applied research focus" },
+  ],
+  focusAreas: [
+    "Generative AI",
+    "Machine Learning",
+    "Reinforcement Learning",
+    "Robotics",
+    "Embedded Systems",
+    "Control Systems",
   ],
   about: siteContent.about.paragraphs,
   experience: siteContent.work.map((role) => ({
