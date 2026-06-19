@@ -30,14 +30,14 @@ npm run preview
 
 ## Editing Content
 
-Most portfolio content lives in `src/data/profile.js`. Update that file to change:
+Most portfolio content lives in `src/data/siteContent.json`. Update that file to change:
 
 - name, headline, location, and intro copy
 - social and contact links
-- experience, projects, skills, and education
+- experience, projects, skills, languages, certificates, and education
 - CV download behavior
 
-The CV button is currently configured as a placeholder. Add a real PDF at `public/cv.pdf` and set `profile.cv.available` to `true` when it is ready.
+`src/data/profile.js` normalizes the JSON into the shape consumed by the React components. The data file intentionally keeps a small amount of sample content so the compiled website shows how placeholder cards and certificates will look.
 
 ## Deployment
 

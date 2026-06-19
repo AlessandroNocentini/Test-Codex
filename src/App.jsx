@@ -6,6 +6,7 @@ const sectionLinks = [
   ["projects", "Projects"],
   ["skills", "Skills"],
   ["education", "Education"],
+  ["certificates", "Certificates"],
   ["contact", "Contact"],
 ];
 
@@ -40,7 +41,7 @@ function Hero() {
           </a>
           {profile.cv.available ? (
             <a className="button button-secondary" href={profile.cv.href} download>
-              Download CV
+              {profile.cv.label}
             </a>
           ) : (
             <span className="button button-secondary button-disabled" aria-disabled="true">
@@ -84,7 +85,17 @@ function Experience() {
               <h3>{role.role}</h3>
               <p className="item-meta">{role.company}</p>
             </div>
-            <p>{role.summary}</p>
+            <div className="item-body">
+              <p>{role.summary}</p>
+              {role.bullets?.length > 0 && (
+                <ul className="tag-list" aria-label={`${role.role} focus areas`}>
+                  {role.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              )}
+              {role.links?.length > 0 && <InlineLinks links={role.links} />}
+            </div>
           </article>
         ))}
       </div>
@@ -101,6 +112,7 @@ function Projects() {
             <div>
               <p className="item-period">{project.type}</p>
               <h3>{project.name}</h3>
+              {project.isExample && <span className="sample-badge">Sample content</span>}
               <p>{project.summary}</p>
             </div>
             <ul className="tag-list" aria-label={`${project.name} technologies`}>
@@ -108,6 +120,7 @@ function Projects() {
                 <li key={tag}>{tag}</li>
               ))}
             </ul>
+            {project.links?.length > 0 && <InlineLinks links={project.links} />}
           </article>
         ))}
       </div>
@@ -130,6 +143,13 @@ function Skills() {
           </article>
         ))}
       </div>
+      <div className="language-strip" aria-label="Languages">
+        {profile.languages.map((language) => (
+          <span key={language.name}>
+            {language.name} - {language.level}
+          </span>
+        ))}
+      </div>
     </Section>
   );
 }
@@ -145,7 +165,30 @@ function Education() {
               <h3>{item.degree}</h3>
               <p className="item-meta">{item.school}</p>
             </div>
-            <p>{item.summary}</p>
+            <div className="item-body">
+              <p>{item.summary}</p>
+              {item.links?.length > 0 && <InlineLinks links={item.links} />}
+            </div>
+          </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function Certificates() {
+  return (
+    <Section id="certificates" kicker="Certificates" title="Credentials and examples">
+      <div className="card-grid">
+        {profile.certificates.map((certificate) => (
+          <article className="project-card" key={`${certificate.name}-${certificate.year}`}>
+            <div>
+              <p className="item-period">{certificate.year}</p>
+              <h3>{certificate.name}</h3>
+              {certificate.isExample && <span className="sample-badge">Sample content</span>}
+              <p>{certificate.issuer}</p>
+            </div>
+            <InlineLinks links={[{ label: "Credential", href: certificate.url }]} />
           </article>
         ))}
       </div>
@@ -167,6 +210,18 @@ function Contact() {
         </div>
       </div>
     </Section>
+  );
+}
+
+function InlineLinks({ links }) {
+  return (
+    <div className="inline-links">
+      {links.map((link) => (
+        <a key={`${link.label}-${link.href}`} href={link.href}>
+          {link.label}
+        </a>
+      ))}
+    </div>
   );
 }
 
@@ -193,12 +248,13 @@ export default function App() {
         <Projects />
         <Skills />
         <Education />
+        <Certificates />
         <Contact />
       </main>
       <footer className="site-footer">
         <p>
           Built by {profile.identity.name}. Update this site from{" "}
-          <code>src/data/profile.js</code>.
+          <code>src/data/siteContent.json</code>.
         </p>
       </footer>
     </>
