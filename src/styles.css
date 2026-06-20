@@ -278,6 +278,11 @@ button:focus-visible {
   margin: 0;
 }
 
+.item-body {
+  display: grid;
+  gap: 0.9rem;
+}
+
 .item-meta {
   margin-top: 0.25rem;
 }
@@ -321,6 +326,52 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.language-strip,
+.inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.language-strip {
+  margin-top: 1rem;
+}
+
+.language-strip span,
+.inline-links a,
+.sample-badge {
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.language-strip span {
+  border: 1px solid rgba(255, 207, 90, 0.36);
+  background: rgba(255, 207, 90, 0.08);
+  color: #fff0bd;
+  padding: 0.55rem 0.75rem;
+}
+
+.inline-links a {
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 0.5rem 0.7rem;
+}
+
+.inline-links a:hover {
+  background: var(--accent);
+  color: #06100d;
+}
+
+.sample-badge {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0.75rem 0;
+  background: rgba(255, 95, 143, 0.14);
+  color: #ffc1d3;
+  padding: 0.42rem 0.62rem;
 }
 
 .contact-panel {
